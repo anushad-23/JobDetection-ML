@@ -4,6 +4,7 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 import model  # Exposes model, vectorizer, metrics
+import os
 
 # import FULL model file
 import model
@@ -54,4 +55,5 @@ def stats():
 
 # run app
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
