@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fake Job Detection Dashboard</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: #0f172a;
+            color: white;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: #020617;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .navbar h2 {
+            margin: 0;
+            color: #38bdf8;
+        }
+
+        /* MAIN */
+        .main {
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            border-radius: 10px;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            background: #0f172a;
+            color: white;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            background: #22c55e;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #16a34a;
+        }
+
+        /* RESULT */
+        .result {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .real {
+            color: #22c55e;
+        }
+
+        .fake {
+            color: #ef4444;
+        }
+
+        /* DASHBOARD CARDS */
+        .cards {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            flex: 1;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #0f172a;
+            text-align: center;
+        }
+
+        .card h3 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .card p {
+            margin: 5px 0 0;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <div class="navbar">
+        <h2>🚀 JobShield AI</h2>
+        <a href="/stats" style="color: #38bdf8; text-decoration: none;">📊 Dashboard Stats</a>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+
+        <!-- DASHBOARD CARDS -->
+        <div class="cards">
+            <div class="card">
+                <h3>98%</h3>
+                <p>Model Accuracy</p>
+            </div>
+            <div class="card">
+                <h3>5000+</h3>
+                <p>Jobs Analyzed</p>
+            </div>
+            <div class="card">
+                <h3>AI</h3>
+                <p>XGBoost Model</p>
+            </div>
+        </div>
+
+        <!-- MAIN CONTAINER -->
+        <div class="container">
+
+            <h1>Analyze Job Posting</h1>
+
+            <form action="/predict" method="post">
+                <textarea name="job_text" placeholder="Paste job description here..."></textarea>
+                <br>
+                <button type="submit">Analyze Job</button>
+            </form>
+
+            {% if prediction_text %}
+                <div class="result 
+                    {% if 'Fake' in prediction_text %}fake{% else %}real{% endif %}">
+                    {{ prediction_text }}
+                </div>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</body>
+</html>
